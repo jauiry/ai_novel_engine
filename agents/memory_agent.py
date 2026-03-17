@@ -1,5 +1,5 @@
 # Memory Agent - 记忆管理 Agent
-from llm import chat
+from llm import chat as ask_llm
 
 
 def summarize_events(events):

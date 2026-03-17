@@ -1,31 +1,37 @@
 # LLM 调用模块
-from openai import OpenAI
-
-# 初始化客户端
-client = OpenAI(
-    api_key="your-api-key-here",
-    base_url="https://api.minimax.chat/v1"
-)
+import requests
+from config import MODEL, TEMPERATURE
 
 
-def chat(prompt, model="MiniMax-M2.5", temperature=0.7):
+def chat(prompt, model=None, temperature=None):
     """
-    调用 LLM 生成回复
+    调用 LLM 生成回复（使用 Ollama 本地模型）
 
     Args:
         prompt: 提示词
-        model: 模型名称
-        temperature: 温度参数
+        model: 模型名称（默认读取 config.py）
+        temperature: 温度参数（默认读取 config.py）
 
     Returns:
         AI 回复内容
     """
-    completion = client.chat.completions.create(
-        model=model,
-        messages=[
-            {"role": "user", "content": prompt}
-        ],
-        temperature=temperature
-    )
+    model = model or MODEL
+    temperature = temperature or TEMPERATURE
 
-    return completion.choices[0].message.content
+    url = "http://localhost:11434/api/generate"
+
+    data = {
+        "model": model,
+        "prompt": prompt,
+        "stream": False,
+        "options": {
+            "temperature": temperature
+        }
+    }
+
+    r = requests.post(url, json=data)
+    return r.json()["response"]
+
+
+# 别名
+ask_llm = chat

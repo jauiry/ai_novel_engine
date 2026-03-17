@@ -7,3 +7,7 @@ venv/
 dist/
 build/
 .pytest_cache/
+
+# 生成的小说文件
+novel/
+data/chapter_*.txt

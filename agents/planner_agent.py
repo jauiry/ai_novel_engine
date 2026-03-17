@@ -1,5 +1,5 @@
 # Planner Agent - 规划 Agent
-from llm import chat
+from llm import chat as ask_llm
 
 
 def plan_novel(genre, premise, target_length="中篇小说"):

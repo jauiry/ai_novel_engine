@@ -1,6 +1,5 @@
-openai
-tqdm
+requests
+faiss-cpu
 numpy
-
-# 可选（用于向量存储）
-# faiss-cpu
+sentence-transformers
+tqdm
