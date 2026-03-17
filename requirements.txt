@@ -1,0 +1,6 @@
+openai
+tqdm
+numpy
+
+# 可选（用于向量存储）
+# faiss-cpu
